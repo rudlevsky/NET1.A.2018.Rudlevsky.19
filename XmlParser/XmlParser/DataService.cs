@@ -22,7 +22,6 @@ namespace XmlParser
 
         public void MoveToFile()
         {
-
             var data = provider.GetData();
             var correctData = new List<Uri>();
 
