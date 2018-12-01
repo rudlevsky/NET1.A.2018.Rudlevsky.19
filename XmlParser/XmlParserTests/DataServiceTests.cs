@@ -17,12 +17,12 @@ namespace XmlParserTests
         IStorage<Uri> storage = new Storage(@"D:\Tasks\NET1.A.2018.Rudlevsky.19\XmlParser\XmlParserTests\bin\Debug\XFile.xml");
         IDataService dataService;
 
-        string httpPath = $"https://github.com/AnzhelikaKravchuk?tab=repositories";
+        string httpsPath = $"https://github.com/AnzhelikaKravchuk?tab=repositories";
 
         [Test]
         public void DataProviderTest_VerifyGetData()
         {
-            IEnumerable<string> collection = new List<string> { httpPath };
+            IEnumerable<string> collection = new List<string> { httpsPath };
 
             var mock = new Mock<IDataProvider<string>>();
 
@@ -62,7 +62,7 @@ namespace XmlParserTests
         {
             var mock = new Mock<IParser<string,Uri>>();
 
-            mock.Setup(d => d.Parse(It.IsAny<string>())).Returns(new Uri(httpPath));
+            mock.Setup(d => d.Parse(It.IsAny<string>())).Returns(new Uri(httpsPath));
 
             dataService = new DataService(provider, mock.Object, storage, logger);
 

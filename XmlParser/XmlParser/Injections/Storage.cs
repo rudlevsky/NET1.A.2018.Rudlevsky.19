@@ -7,12 +7,17 @@ using XmlParser.Interfaces;
 
 namespace XmlParser.Injections
 {
+    /// <summary>
+    /// Class is a data storage.
+    /// </summary>
     public class Storage : IStorage<Uri>
     {
-
         readonly string filePath = string.Empty;
 
-
+        /// <summary>
+        /// Constructor with 1 argument.
+        /// </summary>
+        /// <param name="path">Path of the storage.</param>
         public Storage(string path)
         {
             if(path == null)
@@ -33,7 +38,10 @@ namespace XmlParser.Injections
             filePath = path;
         }
 
-
+        /// <summary>
+        /// Saves data into a storage.
+        /// </summary>
+        /// <param name="source">Data for saving.</param>
         public void Save(IEnumerable<Uri> source)
         {
             if(source == null)
@@ -43,7 +51,6 @@ namespace XmlParser.Injections
 
             SaveData(source);
         }
-
 
         void SaveData(IEnumerable<Uri> source)
         {
