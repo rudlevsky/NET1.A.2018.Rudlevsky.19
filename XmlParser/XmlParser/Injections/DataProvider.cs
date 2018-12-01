@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XmlParser.Interfaces;
 
 namespace XmlParser.Injections
@@ -11,18 +8,18 @@ namespace XmlParser.Injections
     public class DataProvider : IDataProvider<string>
     {
 
-        Stream stream;
+        string filePath;
 
-        public DataProvider(Stream stream)
+        public DataProvider(string filePath)
         {
-            this.stream = stream ?? throw new ArgumentNullException($"{nameof(stream)} was equal to null.");
+            this.filePath = filePath ?? throw new ArgumentNullException($"{nameof(filePath)} was equal to null.");
         }
 
         public IEnumerable<string> GetData()
         {
             var list = new List<string>();
 
-            using(var fileStream = new StreamReader(stream, Encoding.UTF8))
+            using(var fileStream = new StreamReader(filePath))
             {
                 string text = string.Empty;
 

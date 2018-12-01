@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XmlParser;
-using XmlParser.Injections;
+using Ninject;
 using XmlParser.Interfaces;
 
 namespace ConsoleApp
@@ -14,16 +7,12 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            IKernel kernel = new StandardKernel(new Configuration());
            
-            using(var stream = new FileStream("data.txt", FileMode.Open))
-            {
-                string logPath = @"C:\Users\rudle\Desktop\XmlParser\ConsoleApp\bin\Debug\log.txt";
-                IDataService dataService = new DataService(new DataProvider(stream), new Parser(new Validator()), new Storage("XFile.xml"), new NLogger(logPath));
+            var dataService = kernel.Get<IDataService>();
 
-                dataService.MoveToFile();
-            }
-
-            Console.ReadLine();
+            dataService.MoveToFile();
         }
     }
+
 }
